@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMZCSS — Premium Neon Text Animation Templates</title>
+    <meta name="description" content="Shop high-converting neon text animation templates for Alight Motion. Instant download, premium quality, affordable pricing in INR.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #030303;
+            --bg-card: #121212;
+            --bg-card-hover: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent-orange: #ff6b2b;
+            --accent-orange-dim: rgba(255, 107, 43, 0.15);
+            --neon-green: #39ff14;
+            --neon-blue: #00d4ff;
+            --neon-purple: #b347ea;
+            --neon-pink: #ff2d95;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --sidebar-width: 300px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* ─── OVERLAY ─── */
+        .sidebar-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            z-index: 90;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
+
+        /* ─── HEADER ─── */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 64px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .header-right { display: flex; align-items: center; gap: 8px; }
+
+        .hamburger-btn {
+            width: 40px; height: 40px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 5px;
+            background: none; border: none; cursor: pointer;
+            border-radius: 10px; transition: background 0.2s;
+        }
+        .hamburger-btn:hover { background: rgba(255,255,255,0.06); }
+        .hamburger-btn span {
+            display: block; width: 20px; height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+        }
+        .hamburger-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .logo {
+            font-size: 22px; font-weight: 900;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 2px;
+        }
+        .logo-amz { color: var(--text-primary); }
+        .logo-css { color: var(--accent-orange); }
+
+        .icon-btn {
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            background: none; border: 1px solid transparent;
+            border-radius: 10px; cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+        }
+
+        .cart-badge {
+            position: absolute; top: 4px; right: 4px;
+            min-width: 18px; height: 18px;
+            background: var(--accent-orange);
+            color: #fff; font-size: 10px; font-weight: 700;
+            border-radius: 99px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 5px;
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .cart-badge.visible { transform: scale(1); }
+
+        /* ─── SIDEBAR ─── */
+        .sidebar {
+            position: fixed; top: 0; left: 0; bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            z-index: 95;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column;
+            overflow-y: auto;
+        }
+        .sidebar.open { transform: translateX(0); }
+
+        .sidebar-header {
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .sidebar-close {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            background: none; border: none;
+            color: var(--text-muted); cursor: pointer;
+            border-radius: 8px; transition: all 0.2s;
+        }
+        .sidebar-close:hover { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+
+        .sidebar-nav { padding: 16px 12px; flex: 1; }
+
+        .nav-section-label {
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--text-muted);
+            padding: 12px 12px 8px;
+        }
+
+        .nav-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 11px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px; font-weight: 450;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+        .nav-link:hover {
+            background: rgba(255,255,255,0.04);
+            color: var(--text-primary);
+        }
+        .nav-link.active {
+            background: var(--accent-orange-dim);
+            color: var(--accent-orange);
+        }
+        .nav-link .iconify { font-size: 20px; flex-shrink: 0; }
+
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .sidebar-footer a {
+            font-size: 12px; color: var(--text-muted);
+            text-decoration: none; display: block;
+            padding: 3px 0; transition: color 0.2s;
+        }
+        .sidebar-footer a:hover { color: var(--text-secondary); }
+
+        /* ─── MAIN CONTENT ─── */
+        .main { padding-top: 64px; }
+
+        /* ─── HERO / SPOTLIGHT ─── */
+        .spotlight-section {
+            padding: 40px 20px 32px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .spotlight-label {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--neon-green);
+            margin-bottom: 20px;
+            background: rgba(57, 255, 20, 0.06);
+            border: 1px solid rgba(57, 255, 20, 0.15);
+            padding: 6px 14px; border-radius: 99px;
+        }
+        .spotlight-label .pulse-dot {
+            width: 6px; height: 6px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--neon-green); }
+            50% { opacity: 0.4; box-shadow: 0 0 12px var(--neon-green); }
+        }
+
+        .preview-screen {
+            width: 100%; max-width: 720px;
+            aspect-ratio: 16 / 9;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.03),
+                0 20px 60px -15px rgba(0,0,0,0.8),
+                0 0 80px -20px rgba(57, 255, 20, 0.08);
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%; height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%; height: 100%;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+
+        .slide-bg {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, #0a0a0a 0%, #000 100%);
+        }
+
+        .slide-content {
+            position: relative; z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .neon-text {
+            font-size: clamp(28px, 6vw, 56px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .neon-green-text {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(57,255,20,0.6), 0 0 40px rgba(57,255,20,0.3), 0 0 80px rgba(57,255,20,0.1);
+            animation: flicker-green 3s ease-in-out infinite;
+        }
+        .neon-blue-text {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0,212,255,0.6), 0 0 40px rgba(0,212,255,0.3), 0 0 80px rgba(0,212,255,0.1);
+            animation: flicker-blue 4s ease-in-out infinite;
+        }
+        .neon-purple-text {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(179,71,234,0.6), 0 0 40px rgba(179,71,234,0.3), 0 0 80px rgba(179,71,234,0.1);
+            animation: wiggly 2s ease-in-out infinite;
+        }
+        .neon-pink-text {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px rgba(255,45,149,0.6), 0 0 40px rgba(255,45,149,0.3);
+            animation: flicker-pink 3.5s ease-in-out infinite;
+        }
+        .neon-orange-text {
+            color: var(--accent-orange);
+            text-shadow: 0 0 10px rgba(255,107,43,0.6), 0 0 40px rgba(255,107,43,0.3);
+            animation: glow-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes flicker-green {
+            0%, 100% { opacity: 1; }
+            5% { opacity: 0.8; }
+            10% { opacity: 1; }
+            15% { opacity: 0.6; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            85% { opacity: 0.7; }
+            90% { opacity: 1; }
+        }
+        @keyframes flicker-blue {
+            0%, 100% { opacity: 1; }
+            30% { opacity: 0.5; }
+            35% { opacity: 1; }
+            70% { opacity: 0.7; }
+            75% { opacity: 1; }
+        }
+        @keyframes wiggly {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-1.5deg); }
+            75% { transform: rotate(1.5deg); }
+        }
+        @keyframes flicker-pink {
+            0%, 100% { opacity: 1; }
+            20% { opacity: 0.4; }
+            25% { opacity: 1; }
+            50% { opacity: 0.7; }
+            55% { opacity: 1; }
+        }
+        @keyframes glow-pulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.4); }
+        }
+
+        .slide-subtitle {
+            font-size: clamp(11px, 2vw, 14px);
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-weight: 400;
+        }
+
+        .compatibility-badges {
+            position: absolute; bottom: 12px; left: 12px;
+            display: flex; gap: 6px; z-index: 5;
+        }
+        .compat-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 10px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            font-size: 10px; font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .compat-badge .dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+        }
+        .compat-badge .dot.green { background: var(--neon-green); }
+        .compat-badge .dot.blue { background: var(--neon-blue); }
+
+        .carousel-dots {
+            display: flex; gap: 8px;
+            margin-top: 20px;
+        }
+        .carousel-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none; cursor: pointer;
+            transition: all 0.35s ease;
+            padding: 0;
+        }
+        .carousel-dot.active {
+            background: var(--neon-green);
+            box-shadow: 0 0 8px rgba(57,255,20,0.5);
+            width: 24px; border-radius: 4px;
+        }
+
+        /* ─── SECTION HEADERS ─── */
+        .section-header {
+            padding: 32px 20px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: clamp(22px, 4vw, 30px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-weight: 400;
+        }
+
+        /* ─── FILTER BAR ─── */
+        .filter-bar {
+            padding: 0 20px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex; gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .filter-bar::-webkit-scrollbar { display: none; }
+
+        .filter-chip {
+            flex-shrink: 0;
+            padding: 8px 18px;
+            border-radius: 99px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px; font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .filter-chip:hover {
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.03);
+        }
+        .filter-chip.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: #fff;
+        }
+
+        /* ─── PRODUCT GRID ─── */
+        .product-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (min-width: 640px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        }
+        @media (min-width: 768px) {
+            .product-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .product-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column;
+        }
+        .product-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+        }
+
+        .product-media {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #0a0a0a;
+            overflow: hidden;
+        }
+        .product-media video,
+        .product-media img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s, transform 0.5s;
+        }
+        .product-card:hover .product-media video,
+        .product-card:hover .product-media img {
+            opacity: 1; transform: scale(1.03);
+        }
+
+        .product-media-placeholder {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0a0a0a, #111);
+        }
+        .product-media-placeholder .iconify {
+            font-size: 32px;
+            color: var(--text-muted);
+            opacity: 0.4;
+        }
+        .product-media-placeholder span {
+            font-size: 10px;
+            color: var(--text-muted);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .product-media-badge {
+            position: absolute; top: 8px; right: 8px;
+            padding: 3px 8px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 6px;
+            font-size: 9px; font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--neon-green);
+            border: 1px solid rgba(57,255,20,0.2);
+        }
+
+        .product-info {
+            padding: 14px 14px 16px;
+            display: flex; flex-direction: column;
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 13px; font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.35;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .product-meta .dot-sep {
+            width: 3px; height: 3px;
+            background: var(--text-muted);
+            border-radius: 50%;
+        }
+
+        .product-bottom {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 18px; font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        .product-price .currency {
+            font-size: 13px; font-weight: 500;
+            color: var(--text-muted);
+            margin-right: 1px;
+        }
+
+        .add-to-cart-btn {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px;
+            padding: 9px 20px;
+            background: var(--accent-orange);
+            color: #fff;
+            border: none; border-radius: 9px;
+            font-size: 12px; font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            min-width: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .add-to-cart-btn:hover {
+            background: #e85a1f;
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(255,107,43,0.35);
+        }
+        .add-to-cart-btn:active { transform: scale(0.97); }
+        .add-to-cart-btn.added {
+            background: var(--neon-green);
+            color: #000;
+        }
+        .add-to-cart-btn .iconify { font-size: 16px; }
+
+        /* ─── TOAST NOTIFICATION ─── */
+        .toast-container {
+            position: fixed; bottom: 24px; right: 24px;
+            z-index: 200;
+            display: flex; flex-direction: column; gap: 8px;
+            pointer-events: none;
+        }
+        .toast {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-hover);
+            border-radius: 12px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            font-size: 13px; font-weight: 500;
+            color: var(--text-primary);
+            transform: translateX(120%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: auto;
+        }
+        .toast.show { transform: translateX(0); opacity: 1; }
+        .toast .toast-icon {
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .toast .toast-icon.success { background: rgba(57,255,20,0.15); color: var(--neon-green); }
+
+        /* ─── CART DRAWER ─── */
+        .cart-drawer-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            opacity: 0; visibility: hidden;
+            transition: all 0.35s ease;
+        }
+        .cart-drawer-overlay.active { opacity: 1; visibility: visible; }
+
+        .cart-drawer {
+            position: fixed; top: 0; right: 0; bottom: 0;
+            width: 360px; max-width: 90vw;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            z-index: 105;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column;
+        }
+        .cart-drawer.open { transform: translateX(0); }
+
+        .cart-drawer-header {
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .cart-drawer-header h3 {
+            font-size: 16px; font-weight: 700;
+        }
+        .cart-drawer-items {
+            flex: 1; overflow-y: auto; padding: 16px 20px;
+        }
+        .cart-empty {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            height: 100%; gap: 12px;
+            color: var(--text-muted);
+        }
+        .cart-empty .iconify { font-size: 48px; opacity: 0.3; }
+        .cart-empty p { font-size: 14px; }
+
+        .cart-item {
+            display: flex; gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .cart-item-thumb {
+            width: 60px; height: 42px;
+            background: #0a0a0a;
+            border-radius: 8px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .cart-item-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .cart-item-details { flex: 1; min-width: 0; }
+        .cart-item-name {
+            font-size: 13px; font-weight: 500;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .cart-item-price {
+            font-size: 14px; font-weight: 700; color: var(--accent-orange);
+            margin-top: 2px;
+        }
+        .cart-item-remove {
+            background: none; border: none;
+            color: var(--text-muted); cursor: pointer;
+            padding: 4px; border-radius: 6px;
+            transition: all 0.2s;
+            align-self: center;
+        }
+        .cart-item-remove:hover { color: #ff4444; background: rgba(255,68,68,0.1); }
+
+        .cart-drawer-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .cart-total {
+            display: flex; justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .cart-total-label { font-size: 14px; color: var(--text-secondary); }
+        .cart-total-amount { font-size: 20px; font-weight: 700; }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent-orange);
+            color: #fff; border: none;
+            border-radius: 12px;
+            font-size: 14px; font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.25s;
+        }
+        .checkout-btn:hover {
+            background: #e85a1f;
+            box-shadow: 0 4px 20px rgba(255,107,43,0.3);
+        }
+
+        /* ─── FOOTER ─── */
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        @media (min-width: 640px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+        }
+
+        .footer-brand .logo { margin-bottom: 10px; }
+        .footer-brand p {
+            font-size: 13px; color: var(--text-muted);
+            line-height: 1.6; max-width: 280px;
+        }
+
+        .footer-col h4 {
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 13px; color: var(--text-muted);
+            text-decoration: none; padding: 4px 0;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--text-primary); }
+
+        .footer-bottom {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex; flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 12px; color: var(--text-muted);
+        }
+
+        /* ─── SEARCH MODAL ─── */
+        .search-modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            opacity: 0; visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex; align-items: flex-start; justify-content: center;
+            padding-top: 120px;
+        }
+        .search-modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .search-modal {
+            width: 90%; max-width: 560px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-hover);
+            border-radius: 16px;
+            overflow: hidden;
+            transform: translateY(-20px) scale(0.97);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+        }
+        .search-modal-overlay.active .search-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .search-input-wrap {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .search-input-wrap .iconify {
+            font-size: 20px; color: var(--text-muted); flex-shrink: 0;
+        }
+        .search-input {
+            flex: 1; background: none; border: none; outline: none;
+            color: var(--text-primary); font-size: 16px;
+            font-family: inherit;
+        }
+        .search-input::placeholder { color: var(--text-muted); }
+        .search-hint {
+            padding: 12px 20px;
+            font-size: 12px; color: var(--text-muted);
+        }
+        .search-hint kbd {
+            padding: 2px 6px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 11px; font-family: inherit;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.7s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 639px) {
+            .product-grid { gap: 12px; }
+            .product-info { padding: 10px 10px 12px; }
+            .product-title { font-size: 12px; }
+            .product-price { font-size: 16px; }
+            .add-to-cart-btn { padding: 8px 14px; font-size: 11px; min-width: 68px; }
+            .spotlight-section { padding: 24px 16px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="header" role="banner">
+    <div class="header-left">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu">
+            <span></span><span></span><span></span>
+        </button>
+        <a href="#" class="logo" aria-label="AMZCSS Home">
+            <span class="logo-amz">AMZ</span><span class="logo-css">CSS</span>
+        </a>
+    </div>
+    <div class="header-right">
+        <button class="icon-btn" id="searchBtn" aria-label="Search templates">
+            <span class="iconify" data-icon="lucide:search" data-width="20"></span>
+        </button>
+        <button class="icon-btn" id="cartBtn" aria-label="Open shopping cart">
+            <span class="iconify" data-icon="lucide:shopping-bag" data-width="20"></span>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+    </div>
+</header>
+
+<!-- ═══════════ SIDEBAR OVERLAY ═══════════ -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<nav class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+    <div class="sidebar-header">
+        <a href="#" class="logo" style="font-size:18px;">
+            <span class="logo-amz">AMZ</span><span class="logo-css">CSS</span>
+        </a>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Close navigation">
+            <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+    </div>
+    <div class="sidebar-nav">
+        <div class="nav-section-label">Browse</div>
+        <a href="#" class="nav-link active">
+            <span class="iconify" data-icon="lucide:home"></span> Home
+        </a>
+        <a href="#templates" class="nav-link">
+            <span class="iconify" data-icon="lucide:layout-grid"></span> All Templates
+        </a>
+        <a href="#pricing" class="nav-link">
+            <span class="iconify" data-icon="lucide:tag"></span> Pricing
+        </a>
+
+        <div class="nav-section-label" style="margin-top: 12px;">Company</div>
+        <a href="#about" class="nav-link">
+            <span class="iconify" data-icon="lucide:info"></span> About Us
+        </a>
+        <a href="#contact" class="nav-link">
+            <span class="iconify" data-icon="lucide:mail"></span> Contact
+        </a>
+        <a href="#privacy" class="nav-link">
+            <span class="iconify" data-icon="lucide:shield"></span> Privacy Policy
+        </a>
+    </div>
+    <div class="sidebar-footer">
+        <div class="nav-section-label" style="padding-left:0;">SEO & Sitemap</div>
+        <a href="/sitemap.xml">XML Sitemap</a>
+        <a href="/robots.txt">Robots.txt</a>
+        <a href="/rss">RSS Feed</a>
+    </div>
+</nav>
+
+<!-- ═══════════ SEARCH MODAL ═══════════ -->
+<div class="search-modal-overlay" id="searchModal">
+    <div class="search-modal">
+        <div class="search-input-wrap">
+            <span class="iconify" data-icon="lucide:search"></span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search templates..." autofocus>
+            <button style="background:none;border:none;color:var(--text-muted);cursor:pointer;padding:4px;" id="searchClose">
+                <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+            </button>
+        </div>
+        <div class="search-hint">
+            Press <kbd>ESC</kbd> to close &middot; <kbd>Enter</kbd> to search
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════ MAIN CONTENT ═══════════ -->
+<main class="main" role="main">
+
+    <!-- ─── HERO SPOTLIGHT ─── -->
+    <section class="spotlight-section reveal" aria-label="Template preview spotlight">
+        <div class="spotlight-label">
+            <span class="pulse-dot"></span>
+            Live Preview
+        </div>
+
+        <div class="preview-screen" id="previewScreen">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Slide 1 -->
+                <div class="carousel-slide">
+                    <div class="slide-bg"></div>
+                    <div class="slide-content">
+                        <div class="neon-text neon-green-text">Your Text Here</div>
+                        <div class="slide-subtitle">Flickering Neon Green Effect</div>
+                    </div>
+                    <div class="compatibility-badges">
+                        <span class="compat-badge"><span class="dot green"></span> Amz</span>
+                        <span class="compat-badge"><span class="dot blue"></span> Am</span>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-slide">
+                    <div class="slide-bg" style="background: radial-gradient(ellipse at 60% 40%, #080818 0%, #000 100%);"></div>
+                    <div class="slide-content">
+                        <div class="neon-text neon-blue-text">Glitch Effect</div>
+                        <div class="slide-subtitle">Cyberpunk Blue Flicker Animation</div>
+                    </div>
+                    <div class="compatibility-badges">
+                        <span class="compat-badge"><span class="dot green"></span> Amz</span>
+                        <span class="compat-badge"><span class="dot blue"></span> Am</span>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-slide">
+                    <div class="slide-bg" style="background: radial-gradient(ellipse at 40% 60%, #100818 0%, #000 100%);"></div>
+                    <div class="slide-content">
+                        <div class="neon-text neon-purple-text">Wiggly Text</div>
+                        <div class="slide-subtitle">Bouncy Purple Wiggle Motion</div>
+                    </div>
+                    <div class="compatibility-badges">
+                        <span class="compat-badge"><span class="dot green"></span> Amz</span>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="carousel-slide">
+                    <div class="slide-bg" style="background: radial-gradient(ellipse at 50% 50%, #180810 0%, #000 100%);"></div>
+                    <div class="slide-content">
+                        <div class="neon-text neon-pink-text">Neon Pulse</div>
+                        <div class="slide-subtitle">Intense Pink Strobe Flicker</div>
+                    </div>
+                    <div class="compatibility-badges">
+                        <span class="compat-badge"><span class="dot blue"></span> Am</span>
+                    </div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="carousel-slide">
+                    <div class="slide-bg" style="background: radial-gradient(ellipse at 55% 45%, #181008 0%, #000 100%);"></div>
+                    <div class="slide-content">
+                        <div class="neon-text neon-orange-text">Fire Glow</div>
+                        <div class="slide-subtitle">Warm Orange Breathing Glow</div>
+                    </div>
+                    <div class="compatibility-badges">
+                        <span class="compat-badge"><span class="dot green"></span> Amz</span>
+                        <span class="compat-badge"><span class="dot blue"></span> Am</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots">
+            <button class="carousel-dot active" data-index="0" aria-label="Go to slide 1"></button>
+            <button class="carousel-dot" data-index="1" aria-label="Go to slide 2"></button>
+            <button class="carousel-dot" data-index="2" aria-label="Go to slide 3"></button>
+            <button class="carousel-dot" data-index="3" aria-label="Go to slide 4"></button>
+            <button class="carousel-dot" data-index="4" aria-label="Go to slide 5"></button>
+        </div>
+    </section>
+
+    <!-- ─── TEMPLATES SECTION ─── -->
+    <section id="templates" aria-label="Template marketplace">
+        <div class="section-header reveal">
+            <h1 class="section-title">All Templates</h1>
+            <p class="section-subtitle">Premium Alight Motion presets — instant download after purchase</p>
+        </div>
+
+        <div class="filter-bar reveal delay-100" role="tablist" aria-label="Filter templates by category">
+            <button class="filter-chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filter-chip" data-filter="neon" role="tab">Neon</button>
+            <button class="filter-chip" data-filter="flicker" role="tab">Flicker</button>
+            <button class="filter-chip" data-filter="glitch" role="tab">Glitch</button>
+            <button class="filter-chip" data-filter="gravity" role="tab">Gravity</button>
+            <button class="filter-chip" data-filter="color" role="tab">Color</button>
+            <button class="filter-chip" data-filter="3d" role="tab">3D</button>
+            <button class="filter-chip" data-filter="intro" role="tab">Intro</button>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+            <!-- Products injected by JS -->
+        </div>
+    </section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="#" class="logo" style="font-size:20px;">
+                <span class="logo-amz">AMZ</span><span class="logo-css">CSS</span>
+            </a>
+            <p>Premium neon text animation templates for Alight Motion. Crafted for creators who demand the best visual effects.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Templates</h4>
+            <a href="#">Neon Effects</a>
+            <a href="#">Flicker Animations</a>
+            <a href="#">Glitch Presets</a>
+            <a href="#">3D Text</a>
+            <a href="#">Intro Packs</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            <a href="#">Pricing</a>
+            <a href="#">Affiliate Program</a>
+        </div>
+        <div class="footer-col">
+            <h4>Legal & SEO</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Refund Policy</a>
+            <a href="/sitemap.xml">XML Sitemap</a>
+            <a href="/robots.txt">Robots.txt</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2025 AMZCSS. All rights reserved.</span>
+        <span>Made with passion for creators</span>
+    </div>
+</footer>
+
+<!-- ═══════════ CART DRAWER ═══════════ -->
+<div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Shopping cart">
+    <div class="cart-drawer-header">
+        <h3>Your Cart</h3>
+        <button class="sidebar-close" id="cartDrawerClose" aria-label="Close cart">
+            <span class="iconify" data-icon="lucide:x" data-width="18"></span>
+        </button>
+    </div>
+    <div class="cart-drawer-items" id="cartItems">
+        <div class="cart-empty" id="cartEmpty">
+            <span class="iconify" data-icon="lucide:shopping-bag"></span>
+            <p>Your cart is empty</p>
+        </div>
+    </div>
+    <div class="cart-drawer-footer" id="cartFooter" style="display:none;">
+        <div class="cart-total">
+            <span class="cart-total-label">Total</span>
+            <span class="cart-total-amount" id="cartTotal">₹0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+</aside>
+
+<!-- ═══════════ TOAST CONTAINER ═══════════ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ═══════════ JAVASCRIPT ═══════════ -->
+<script>
+(function() {
+    'use strict';
+
+    // ─── PRODUCT DATA ───
+    const products = [
+        { id: 1, name: 'Gravity Build AN', category: 'gravity', price: 49, compat: ['Amz','Am'], badge: 'Popular', video: null, color: '#39ff14' },
+        { id: 2, name: '5 Fliker Letter Color', category: 'flicker', price: 39, compat: ['Amz'], badge: null, video: null, color: '#ff2d95' },
+        { id: 3, name: 'Neon Green Glow Text', category: 'neon', price: 29, compat: ['Amz','Am'], badge: 'New', video: null, color: '#39ff14' },
+        { id: 4, name: 'Cyber Glitch Intro', category: 'glitch', price: 59, compat: ['Am'], badge: null, video: null, color: '#00d4ff' },
+        { id: 5, name: '3D Depth Text Pop', category: '3d', price: 69, compat: ['Amz','Am'], badge: 'Premium', video: null, color: '#b347ea' },
+        { id: 6, name: 'Purple Wiggly Neon', category: 'neon', price: 35, compat: ['Amz'], badge: null, video: null, color: '#b347ea' },
+        { id: 7, name: 'Fire Orange Flicker', category: 'flicker', price: 39, compat: ['Amz','Am'], badge: null, video: null, color: '#ff6b2b' },
+        { id: 8, name: 'Cinematic Intro Pack', category: 'intro', price: 99, compat: ['Amz','Am'], badge: 'Best Value', video: null, color: '#00d4ff' },
+        { id: 9, name: 'Blue Neon Pulse', category: 'neon', price: 29, compat: ['Am'], badge: null, video: null, color: '#00d4ff' },
+        { id: 10, name: 'Gravity Fall Effect', category: 'gravity', price: 49, compat: ['Amz'], badge: null, video: null, color: '#39ff14' },
+        { id: 11, name: 'Multi-Color Shake', category: 'color', price: 45, compat: ['Amz','Am'], badge: 'New', video: null, color: '#ff2d95' },
+        { id: 12, name: '3D Rotating Cube Text', category: '3d', price: 79, compat: ['Am'], badge: 'Premium', video: null, color: '#b347ea' },
+        { id: 13, name: 'Pink Strobe Flicker', category: 'flicker', price: 35, compat: ['Amz'], badge: null, video: null, color: '#ff2d95' },
+        { id: 14, name: 'Quick Slash Intro', category: 'intro', price: 55, compat: ['Amz','Am'], badge: null, video: null, color: '#ff6b2b' },
+        { id: 15, name: 'Glitch RGB Split', category: 'glitch', price: 49, compat: ['Amz','Am'], badge: 'Popular', video: null, color: '#00d4ff' },
+        { id: 16, name: 'Color Wave Text', category: 'color', price: 39, compat: ['Amz'], badge: null, video: null, color: '#39ff14' },
+    ];
+
+    // ─── STATE ───
+    let cart = [];
+    let currentSlide = 0;
+    let carouselInterval;
+    const totalSlides = 5;
+
+    // ─── DOM REFS ───
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const searchBtn = document.getElementById('searchBtn');
+    const searchModal = document.getElementById('searchModal');
+    const searchInput = document.getElementById('searchInput');
+    const searchClose = document.getElementById('searchClose');
+    const cartBtn = document.getElementById('cartBtn');
+    const cartBadge = document.getElementById('cartBadge');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartDrawerOverlay = document.getElementById('cartDrawerOverlay');
+    const cartDrawerClose = document.getElementById('cartDrawerClose');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartEmpty = document.getElementById('cartEmpty');
+    const cartFooter = document.getElementById('cartFooter');
+    const cartTotal = document.getElementById('cartTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const productGrid = document.getElementById('productGrid');
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselDots = document.getElementById('carouselDots');
+    const toastContainer = document.getElementById('toastContainer');
+
+    // ─── SIDEBAR ───
+    function openSidebar() {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+        hamburgerBtn.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        hamburgerBtn.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    hamburgerBtn.addEventListener('click', () => {
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+    sidebarOverlay.addEventListener('click', closeSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+
+    // ─── SEARCH ───
+    function openSearch() {
+        searchModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => searchInput.focus(), 100);
+    }
+    function closeSearch() {
+        searchModal.classList.remove('active');
+        document.body.style.overflow = '';
+        searchInput.value = '';
+    }
+    searchBtn.addEventListener('click', openSearch);
+    searchClose.addEventListener('click', closeSearch);
+    searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) closeSearch();
+    });
+
+    // ─── CAROUSEL ───
+    function goToSlide(index) {
+        currentSlide = index;
+        carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+    }
+    function nextSlide() {
+        goToSlide((currentSlide + 1) % totalSlides);
+    }
+    function startCarousel() {
+        carouselInterval = setInterval(nextSlide, 4000);
+    }
+    function resetCarousel() {
+        clearInterval(carouselInterval);
+        startCarousel();
+    }
+
+    carouselDots.addEventListener('click', (e) => {
+        const dot = e.target.closest('.carousel-dot');
+        if (!dot) return;
+        goToSlide(parseInt(dot.dataset.index));
+        resetCarousel();
+    });
+
+    // Touch/Swipe support for carousel
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const previewScreen = document.getElementById('previewScreen');
+    previewScreen.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    previewScreen.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0 && currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+            else if (diff < 0 && currentSlide > 0) goToSlide(currentSlide - 1);
+            resetCarousel();
+        }
+    }, { passive: true });
+
+    startCarousel();
+
+    // ─── CART DRAWER ───
+    function openCart() {
+        cartDrawer.classList.add('open');
+        cartDrawerOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+        cartDrawer.classList.remove('open');
+        cartDrawerOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    cartBtn.addEventListener('click', openCart);
+    cartDrawerOverlay.addEventListener('click', closeCart);
+    cartDrawerClose.addEventListener('click', closeCart);
+
+    // ─── TOAST ───
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `
+            <div class="toast-icon success">
+                <span class="iconify" data-icon="lucide:check" data-width="16"></span>
+            </div>
+            <span>${message}</span>
+        `;
+        toastContainer.appendChild(toast);
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => toast.classList.add('show'));
+        });
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400);
+        }, 2500);
+    }
+
+    // ─── CART LOGIC ───
+    function updateCartUI() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        cartBadge.textContent = count;
+        cartBadge.classList.toggle('visible', count > 0);
+
+        if (cart.length === 0) {
+            cartEmpty.style.display = 'flex';
+            cartFooter.style.display = 'none';
+            // Remove all cart-item elements
+            cartItemsEl.querySelectorAll('.cart-item').forEach(el => el.remove());
+            return;
+        }
+
+        cartEmpty.style.display = 'none';
+        cartFooter.style.display = 'block';
+
+        // Rebuild items
+        cartItemsEl.querySelectorAll('.cart-item').forEach(el => el.remove());
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price * item.qty;
+            const div = document.createElement('div');
+            div.className = 'cart-item';
+            div.innerHTML = `
+                <div class="cart-item-thumb" style="background:linear-gradient(135deg, ${item.color}22, #0a0a0a); display:flex; align-items:center; justify-content:center;">
+                    <span class="iconify" data-icon="lucide:play" data-width="16" style="color:${item.color}; opacity:0.6;"></span>
+                </div>
+                <div class="cart-item-details">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">₹${item.price}</div>
+                </div>
+                <button class="cart-item-remove" data-id="${item.id}" aria-label="Remove ${item.name} from cart">
+                    <span class="iconify" data-icon="lucide:trash-2" data-width="16"></span>
+                </button>
+            `;
+            cartItemsEl.appendChild(div);
+        });
+
+        cartTotal.textContent = `₹${total}`;
+
+        // Bind remove buttons
+        cartItemsEl.querySelectorAll('.cart-item-remove').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = parseInt(btn.dataset.id);
+                cart = cart.filter(item => item.id !== id);
+                updateCartUI();
+                updateProductButtons();
+            });
+        });
+    }
+
+    function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+
+        const existing = cart.find(item => item.id === productId);
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            cart.push({ ...product, qty: 1 });
+        }
+
+        updateCartUI();
+        updateProductButtons();
+        showToast(`${product.name} added to cart`);
+    }
+
+    function updateProductButtons() {
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            const id = parseInt(btn.dataset.id);
+            const inCart = cart.find(item => item.id === id);
+            if (inCart) {
+                btn.classList.add('added');
+                btn.innerHTML = `<span class="iconify" data-icon="lucide:check" data-width="14"></span> Added`;
+            } else {
+                btn.classList.remove('added');
+                btn.innerHTML = `<span class="iconify" data-icon="lucide:plus" data-width="14"></span> ADD`;
+            }
+        });
+    }
+
+    checkoutBtn.addEventListener('click', () => {
+        if (cart.length === 0) return;
+        const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        showToast(`Checkout: ₹${total} — Coming soon!`);
+    });
+
+    // ─── RENDER PRODUCTS ───
+    function renderProducts(filter = 'all') {
+        const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+        productGrid.innerHTML = '';
+
+        filtered.forEach((product, index) => {
+            const card = document.createElement('article');
+            card.className = `product-card reveal delay-${Math.min(index % 4, 3) * 100}`;
+
+            const compatBadges = product.compat.map(c => {
+                const dotClass = c === 'Amz' ? 'green' : 'blue';
+                return `<span class="compat-badge" style="position:static;"><span class="dot ${dotClass}"></span> ${c}</span>`;
+            }).join('');
+
+            const badgeHTML = product.badge
+                ? `<span class="product-media-badge">${product.badge}</span>`
+                : '';
+
+            // Lazy video loading structure
+            let mediaHTML;
+            if (product.video) {
+                mediaHTML = `
+                    <video
+                        data-src="${product.video}"
+                        muted loop playsinline
+                        preload="none"
+                        poster=""
+                        loading="lazy"
+                    ></video>
+                `;
+            } else {
+                mediaHTML = `
+                    <div class="product-media-placeholder">
+                        <span class="iconify" data-icon="lucide:play-circle"></span>
+                        <span>Preview</span>
+                    </div>
+                `;
+            }
+
+            const inCart = cart.find(item => item.id === product.id);
+            const btnClass = inCart ? 'add-to-cart-btn added' : 'add-to-cart-btn';
+            const btnContent = inCart
+                ? `<span class="iconify" data-icon="lucide:check" data-width="14"></span> Added`
+                : `<span class="iconify" data-icon="lucide:plus" data-width="14"></span> ADD`;
+
+            card.innerHTML = `
+                <div class="product-media">
+                    ${mediaHTML}
+                    ${badgeHTML}
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name}</h3>
+                    <div class="product-meta">
+                        ${compatBadges}
+                    </div>
+                    <div class="product-bottom">
+                        <div class="product-price">
+                            <span class="currency">₹</span>${product.price}
+                        </div>
+                        <button class="${btnClass}" data-id="${product.id}">
+                            ${btnContent}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            productGrid.appendChild(card);
+        });
+
+        // Bind add-to-cart buttons
+        productGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                addToCart(parseInt(btn.dataset.id));
+            });
+        });
+
+        // Trigger reveal animations
+        requestAnimationFrame(() => {
+            observeReveals();
+        });
+    }
+
+    // ─── FILTER CHIPS ───
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('.filter-chip').forEach(c => {
+                c.classList.remove('active');
+                c.setAttribute('aria-selected', 'false');
+            });
+            chip.classList.add('active');
+            chip.setAttribute('aria-selected', 'true');
+            renderProducts(chip.dataset.filter);
+        });
+    });
+
+    // ─── SCROLL REVEAL ───
+    function observeReveals() {
+        const reveals = document.querySelectorAll('.reveal:not(.active)');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        reveals.forEach(el => observer.observe(el));
+    }
+
+    // ─── LAZY VIDEO LOADING ───
+    function lazyLoadVideos() {
+        const videos = document.querySelectorAll('video[data-src]');
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    video.src = video.dataset.src;
+                    video.removeAttribute('data-src');
+                    videoObserver.unobserve(video);
+
+                    // Autoplay on hover
+                    const card = video.closest('.product-card');
+                    if (card) {
+                        card.addEventListener('mouseenter', () => video.play().catch(() => {}));
+                        card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+                    }
+                }
+            });
+        }, { rootMargin: '200px' });
+
+        videos.forEach(v => videoObserver.observe(v));
+    }
+
+    // ─── KEYBOARD SHORTCUTS ───
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeSidebar();
+            closeSearch();
+            closeCart();
+        }
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            openSearch();
+        }
+    });
+
+    // ─── SIDEBAR NAV ACTIVE STATE ───
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.getAttribute('href') === '#') e.preventDefault();
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            closeSidebar();
+        });
+    });
+
+    // ─── INIT ───
+    renderProducts();
+    observeReveals();
+    updateCartUI();
+
+    // Re-observe after DOM updates
+    const gridObserver = new MutationObserver(() => {
+        lazyLoadVideos();
+    });
+    gridObserver.observe(productGrid, { childList: true });
+
+})();
+</script>
+
+</body>
+</html>
