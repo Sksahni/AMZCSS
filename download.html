@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>पेमेंट सफल - डाउनलोड करें</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f7f9fa; padding: 50px; }
+        .container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: inline-block; }
+        h1 { color: #2ed573; }
+        .download-btn { display: inline-block; padding: 15px 30px; background-color: #1e90ff; color: white; text-decoration: none; font-size: 18px; font-weight: bold; border-radius: 5px; margin-top: 20px; }
+        .download-btn:hover { background-color: #0077e6; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>भुगतान सफल रहा! 🎉</h1>
+        <p>आपका पेमेंट मिल गया है। नीचे दिए गए बटन से अपनी फाइल डाउनलोड करें।</p>
+        
+        <!-- यह बटन जादुई रूप से बदलेगा -->
+        <a id="dynamic-download-btn" href="#" class="download-btn">📥 डाउनलोड करें</a>
+    </div>
+
+    <script>
+        // 1. यूआरएल से आइटम का नाम पता करना (?item=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const item = urlParams.get('item');
+
+        // 2. अपने सभी आइटम्स के असली डाउनलोड लिंक्स यहाँ डालें
+        const fileLinks = {
+            'body Aura sell': 'https://github.com/user-attachments/files/29887765/sell.body.aura.web.xml',
+            'software': 'https://github.com/username/repo/releases/download/v1/software.zip',
+            'course': 'https://mega.nz/file/your_course_link_here'
+        };
+
+        // 3. बटन का लिंक ऑटोमेटिकली चेंज करना
+        const downloadBtn = document.getElementById('dynamic-download-btn');
+        
+        if (item && fileLinks[item]) {
+            downloadBtn.href = fileLinks[item];
+        } else {
+            // अगर कोई सीधे इस पेज पर आएगा तो उसे एरर दिखेगा
+            downloadBtn.innerText = "फाइल नहीं मिली!";
+            downloadBtn.style.backgroundColor = "#ff4757";
+            downloadBtn.href = "#";
+        }
+    </script>
+
+</body>
+</html>
+
