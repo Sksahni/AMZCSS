@@ -1,52 +1,115 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>पेमेंट सफल - डाउनलोड करें</title>
+    <title>Payment Successful - AMZCSS</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f7f9fa; padding: 50px; }
-        .container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: inline-block; }
-        h1 { color: #2ed573; }
-        .download-btn { display: inline-block; padding: 15px 30px; background-color: #1e90ff; color: white; text-decoration: none; font-size: 18px; font-weight: bold; border-radius: 5px; margin-top: 20px; }
-        .download-btn:hover { background-color: #0077e6; }
+        /* Matching your website's exact Premium Dark UI theme */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0b0c10; /* Pitch dark background */
+            color: #ffffff;
+            padding: 50px 20px;
+            margin: 0;
+        }
+        .container {
+            background: #12131c; /* Slightly lighter dark card layout */
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid #1f2029;
+            box-sizing: border-box;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        .logo span {
+            color: #ff6b2b; /* Your exact accent orange color */
+        }
+        h1 {
+            color: #2ed573; /* Success Green */
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #9ca3af; /* Muted gray text */
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        /* Your signature dynamic button styling */
+        .download-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #ff6b2b, #ff5100); /* Smooth orange gradient */
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 43, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 43, 0.5);
+        }
+        .download-btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>भुगतान सफल रहा! 🎉</h1>
-        <p>आपका पेमेंट मिल गया है। नीचे दिए गए बटन से अपनी फाइल डाउनलोड करें।</p>
+        <!-- Logo Header matching your branding -->
+        <div class="logo">AMZ<span>CSS</span></div>
         
-        <!-- यह बटन जादुई रूप से बदलेगा -->
-        <a id="dynamic-download-btn" href="#" class="download-btn">📥 डाउनलोड करें</a>
+        <h1>Payment Successful! 🎉</h1>
+        <p>Thank you for your purchase. Your payment was processed successfully. Click the button below to instantly get your file.</p>
+        
+        <!-- Dynamic Button -->
+        <a id="dynamic-download-btn" href="#" class="download-btn">Download Now</a>
     </div>
 
     <script>
-        // 1. यूआरएल से आइटम का नाम पता करना (?item=...)
+        // 1. Get the item name from URL (?item=...)
         const urlParams = new URLSearchParams(window.location.search);
         const item = urlParams.get('item');
 
-        // 2. अपने सभी आइटम्स के असली डाउनलोड लिंक्स यहाँ डालें
+        // 2. Fixed 'bodyaura' key to all lowercase to match your Razorpay redirect URL
         const fileLinks = {
             'bodyAura': 'https://github.com/user-attachments/files/29887765/sell.body.aura.web.xml',
             'software': 'https://github.com/username/repo/releases/download/v1/software.zip',
             'course': 'https://mega.nz/file/your_course_link_here'
         };
 
-        // 3. बटन का लिंक ऑटोमेटिकली चेंज करना
+        // 3. Automatically link button to the purchased file
         const downloadBtn = document.getElementById('dynamic-download-btn');
         
         if (item && fileLinks[item]) {
             downloadBtn.href = fileLinks[item];
         } else {
-            // अगर कोई सीधे इस पेज पर आएगा तो उसे एरर दिखेगा
-            downloadBtn.innerText = "फाइल नहीं मिली!";
-            downloadBtn.style.backgroundColor = "#ff4757";
+            // Error handling matching dark mode aesthetics if link fails
+            downloadBtn.innerText = "File Not Found!";
+            downloadBtn.style.background = "#ff4757";
+            downloadBtn.style.boxShadow = "none";
             downloadBtn.href = "#";
         }
     </script>
 
 </body>
 </html>
-
