@@ -3,113 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful - AMZCSS</title>
+    <title>Downloading Your Preset...</title>
     <style>
-        /* Matching your website's exact Premium Dark UI theme */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #0b0c10; /* Pitch dark background */
-            color: #ffffff;
-            padding: 50px 20px;
-            margin: 0;
-        }
-        .container {
-            background: #12131c; /* Slightly lighter dark card layout */
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            display: inline-block;
-            max-width: 400px;
-            width: 100%;
-            border: 1px solid #1f2029;
-            box-sizing: border-box;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            color: #ffffff;
-        }
-        .logo span {
-            color: #ff6b2b; /* Your exact accent orange color */
-        }
-        h1 {
-            color: #2ed573; /* Success Green */
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #9ca3af; /* Muted gray text */
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        /* Your signature dynamic button styling */
-        .download-btn {
-            display: inline-block;
-            padding: 14px 40px;
-            background: linear-gradient(135deg, #ff6b2b, #ff5100); /* Smooth orange gradient */
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 43, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 43, 0.5);
-        }
-        .download-btn:active {
-            transform: translateY(0);
-        }
+        body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding-top: 100px; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Logo Header matching your branding -->
-        <div class="logo">AMZ<span>CSS</span></div>
-        
-        <h1>Payment Successful! 🎉</h1>
-        <p>Thank you for your purchase. Your payment was processed successfully. Click the button below to instantly get your file.</p>
-        
-        <!-- Dynamic Button -->
-        <a id="dynamic-download-btn" href="#" class="download-btn">Download Now</a>
-    </div>
+    <h2>Your download is starting automatically...</h2>
+    <div class="loader"></div>
+    <p>Please do not close or refresh this page.</p>
 
     <script>
-        // 1. Get the item name from URL (?item=...)
+        // 1. यह कोड URL से फाइल का नाम पढ़ेगा (जैसे: ?preset=gravity)
         const urlParams = new URLSearchParams(window.location.search);
-        const item = urlParams.get('item');
+        const presetName = urlParams.get('preset');
 
-        // 2. Fixed 'bodyaura' key to all lowercase to match your Razorpay redirect URL
-        const fileLinks = {
-            'bodyAura': 'https://github.com/user-attachments/files/29887765/sell.body.aura.web.xml',
-            'software': 'https://github.com/username/repo/releases/download/v1/software.zip',
-            'course': 'https://mega.nz/file/your_course_link_here'
-        };
+        if (presetName) {
+            // 2. यह तुम्हारे 'presets' फोल्डर का गुप्त रास्ता है
+            const securePath = `./presets/${presetName}.xml`;
 
-        // 3. Automatically link button to the purchased file
-        const downloadBtn = document.getElementById('dynamic-download-btn');
-        
-        if (item && fileLinks[item]) {
-            downloadBtn.href = fileLinks[item];
+            // 3. बिना लिंक दिखाए फाइल डाउनलोड करने का जादू (Blob Method)
+            fetch(securePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("File not found");
+                    return response.blob();
+                })
+                .then(blob => {
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = `${presetName}_preset.xml`; // फोन में डाउनलोड होने वाला नाम
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    // काम होते ही नकली लिंक को तुरंत डिलीट करना
+                    window.URL.revokeObjectURL(blobUrl);
+                    a.remove();
+                    
+                    document.querySelector('h2').innerText = "Download Successful! You can close this tab.";
+                    document.querySelector('.loader').style.display = 'none';
+                })
+                .catch(err => {
+                    document.querySelector('h2').innerText = "Error: File not found or invalid link!";
+                    document.querySelector('.loader').style.display = 'none';
+                });
         } else {
-            // Error handling matching dark mode aesthetics if link fails
-            downloadBtn.innerText = "File Not Found!";
-            downloadBtn.style.background = "#ff4757";
-            downloadBtn.style.boxShadow = "none";
-            downloadBtn.href = "#";
+            document.querySelector('h2').innerText = "No preset selected.";
         }
     </script>
-
 </body>
 </html>
