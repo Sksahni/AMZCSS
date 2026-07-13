@@ -3,56 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Downloading Your Preset...</title>
+    <title>Downloading Your Preset - AMZCSS</title>
     <style>
-        body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding-top: 100px; }
-        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0b0c10;
+            color: #ffffff;
+            padding: 100px 20px;
+            margin: 0;
+        }
+        .container {
+            background: #12131c;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid #1f2029;
+            box-sizing: border-box;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        .logo span {
+            color: #ff6b2b;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        /* Loading Spinner Animation */
+        .spinner {
+            margin: 20px auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #1f2029;
+            border-top: 5px solid #ff6b2b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error-msg {
+            color: #ff4757;
+            font-weight: bold;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
-    <h2>Your download is starting automatically...</h2>
-    <div class="loader"></div>
-    <p>Please do not close or refresh this page.</p>
+    <div class="container">
+        <div class="logo">AMZ<span>CSS</span></div>
+        <div id="status-area">
+            <h1>Downloading Your Preset...</h1>
+            <div class="spinner"></div>
+            <p>Please do not close or refresh this page. Your download will start automatically in a moment.</p>
+        </div>
+    </div>
 
     <script>
-        // 1. यह कोड URL से फाइल का नाम पढ़ेगा (जैसे: ?preset=gravity)
+        // 1. Get the item keyword from Razorpay redirect URL (?item=...)
         const urlParams = new URLSearchParams(window.location.search);
-        const presetName = urlParams.get('preset');
+        const item = urlParams.get('item');
 
-        if (presetName) {
-            // 2. यह तुम्हारे 'presets' फोल्डर का गुप्त रास्ता है
-            const securePath = `./presets/${presetName}.xml`;
+        // 2. Exact Raw GitHub Links for direct download
+        const fileLinks = {
+            'bodyaura': 'https://raw.githubusercontent.com/Sksahni/AMZCSS/main/prestes/sell.body.aura.web.xml',
+            'elvenglow': 'https://raw.githubusercontent.com/Sksahni/AMZCSS/main/prestes/AMZCSS%20ELVEN%20GLOW.xml',
+            'file': 'https://raw.githubusercontent.com/Sksahni/AMZCSS/main/prestes/file.xml'
+        };
 
-            // 3. बिना लिंक दिखाए फाइल डाउनलोड करने का जादू (Blob Method)
-            fetch(securePath)
-                .then(response => {
-                    if (!response.ok) throw new Error("File not found");
-                    return response.blob();
-                })
-                .then(blob => {
-                    const blobUrl = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = blobUrl;
-                    a.download = `${presetName}_preset.xml`; // फोन में डाउनलोड होने वाला नाम
-                    document.body.appendChild(a);
-                    a.click();
-                    
-                    // काम होते ही नकली लिंक को तुरंत डिलीट करना
-                    window.URL.revokeObjectURL(blobUrl);
-                    a.remove();
-                    
-                    document.querySelector('h2').innerText = "Download Successful! You can close this tab.";
-                    document.querySelector('.loader').style.display = 'none';
-                })
-                .catch(err => {
-                    document.querySelector('h2').innerText = "Error: File not found or invalid link!";
-                    document.querySelector('.loader').style.display = 'none';
-                });
+        const statusArea = document.getElementById('status-area');
+
+        // 3. Trigger auto-download if item is found
+        if (item && fileLinks[item.toLowerCase()]) {
+            setTimeout(() => {
+                const downloadLink = document.createElement('a');
+                downloadLink.href = fileLinks[item.toLowerCase()];
+                downloadLink.download = ""; // Triggers native download browser behavior
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                // Update text after download triggers
+                statusArea.innerHTML = `
+                    <h1 style="color: #2ed573;">Download Started! 🎉</h1>
+                    <p>If your download didn't start, <a href="${fileLinks[item.toLowerCase()]}" style="color: #ff6b2b; text-decoration: underline; font-weight: bold;">click here</a> to grab it directly.</p>
+                `;
+            }, 2000); // 2 seconds delay for a smooth professional transition
         } else {
-            document.querySelector('h2').innerText = "No preset selected.";
+            // Fixes the "No preset selected" error with correct design language
+            statusArea.innerHTML = `
+                <h1 class="error-msg">No Preset Selected!</h1>
+                <p>We couldn't detect which template you purchased. Please try accessing the link directly from your payment confirmation receipt.</p>
+            `;
         }
     </script>
+
 </body>
 </html>
