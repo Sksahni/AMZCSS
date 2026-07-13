@@ -3,40 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Downloading Your Preset - AMZCSS</title>
+    <title>Order Confirmed - Thank You for Your Purchase | AMZCSS</title>
     <style>
+        /* Premium Dark Theme matching your main website */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             background-color: #0b0c10;
             color: #ffffff;
-            padding: 100px 20px;
+            padding: 80px 20px;
             margin: 0;
         }
         .container {
             background: #12131c;
             padding: 40px 30px;
             border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
             display: inline-block;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
             border: 1px solid #1f2029;
             box-sizing: border-box;
         }
         .logo {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+            margin-bottom: 25px;
             color: #ffffff;
         }
         .logo span {
-            color: #ff6b2b;
+            color: #ff6b2b; /* Your signature brand orange color */
+        }
+        .success-badge {
+            background: rgba(46, 213, 115, 0.1);
+            color: #2ed573;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(46, 213, 115, 0.2);
         }
         h1 {
             color: #ffffff;
-            font-size: 22px;
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        .thank-you-text {
+            color: #ff6b2b;
+            font-size: 15px;
+            font-weight: 600;
             margin-bottom: 15px;
         }
         p {
@@ -45,13 +66,13 @@
             line-height: 1.6;
             margin-bottom: 30px;
         }
-        /* Loading Spinner Animation */
+        /* Sleek Loading Spinner */
         .spinner {
             margin: 20px auto;
-            width: 50px;
-            height: 50px;
-            border: 5px solid #1f2029;
-            border-top: 5px solid #ff6b2b;
+            width: 45px;
+            height: 45px;
+            border: 4px solid #1f2029;
+            border-top: 4px solid #ff6b2b;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -62,7 +83,14 @@
         .error-msg {
             color: #ff4757;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
+        }
+        .footer-note {
+            font-size: 11px;
+            color: #4b5563;
+            margin-top: 20px;
+            border-top: 1px solid #1f2029;
+            padding-top: 15px;
         }
     </style>
 </head>
@@ -70,48 +98,56 @@
 
     <div class="container">
         <div class="logo">AMZ<span>CSS</span></div>
+        
         <div id="status-area">
-            <h1>Downloading Your Preset...</h1>
+            <div class="success-badge">Payment Verified</div>
+            <h1>Thank You for Your Order!</h1>
+            <div class="thank-you-text">Your premium preset is ready for deployment.</div>
+            
             <div class="spinner"></div>
-            <p>Please do not close or refresh this page. Your download will start automatically in a moment.</p>
+            
+            <p>We appreciate your business! Your automatic high-speed download is starting now. Please do not close this window.</p>
+        </div>
+
+        <div class="footer-note">
+            Securely processed by AMZCSS. For support, contact via your dashboard.
         </div>
     </div>
 
     <script>
-        // 1. Get the item keyword from Razorpay redirect URL (?item=...)
+        // 1. Get the exact file name from Razorpay URL (?item=filename.xml)
         const urlParams = new URLSearchParams(window.location.search);
-        const item = urlParams.get('item');
-
-        // 2. Exact Raw GitHub Links for direct download
-        const fileLinks = {
-            'bodyaura': 'https://raw.githubusercontent.com/Sksahni/AMZCSS/main/prestes/sell.body.aura.web.xml',
-            'elvenglow': 'https://raw.githubusercontent.com/Sksahni/AMZCSS/main/prestes/AMZCSS%20ELVEN%20GLOW.xml',
-            'file': 'https://raw.githubusercontent.com/Sksahni/AMZCSS/main/prestes/file.xml'
-        };
+        const fileName = urlParams.get('item');
 
         const statusArea = document.getElementById('status-area');
 
-        // 3. Trigger auto-download if item is found
-        if (item && fileLinks[item.toLowerCase()]) {
+        // 2. Connects directly with your 'prestes' folder
+        if (fileName) {
+            const directDownloadUrl = `https://raw.githubusercontent.com/Sksahni/AMZCSS/main/prestes/${fileName}`;
+
+            // 3. Triggers the automatic download after 2 seconds
             setTimeout(() => {
                 const downloadLink = document.createElement('a');
-                downloadLink.href = fileLinks[item.toLowerCase()];
-                downloadLink.download = ""; // Triggers native download browser behavior
+                downloadLink.href = directDownloadUrl;
+                downloadLink.download = fileName; 
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
                 
-                // Update text after download triggers
+                // Show updated premium success screen with direct link option
                 statusArea.innerHTML = `
+                    <div class="success-badge" style="background: rgba(46, 213, 115, 0.15); color: #2ed573;">Success</div>
                     <h1 style="color: #2ed573;">Download Started! 🎉</h1>
-                    <p>If your download didn't start, <a href="${fileLinks[item.toLowerCase()]}" style="color: #ff6b2b; text-decoration: underline; font-weight: bold;">click here</a> to grab it directly.</p>
+                    <div class="thank-you-text" style="color: #ffffff;">Thank you for choosing AMZCSS premium presets.</div>
+                    <p>Your file has been sent to your browser. If your download didn't start automatically, <a href="${directDownloadUrl}" style="color: #ff6b2b; text-decoration: underline; font-weight: bold;">click here</a> to download directly.</p>
                 `;
-            }, 2000); // 2 seconds delay for a smooth professional transition
+            }, 2500); // 2.5 seconds for a premium, satisfying experience
         } else {
-            // Fixes the "No preset selected" error with correct design language
+            // Error state if user visits page directly without purchasing
             statusArea.innerHTML = `
-                <h1 class="error-msg">No Preset Selected!</h1>
-                <p>We couldn't detect which template you purchased. Please try accessing the link directly from your payment confirmation receipt.</p>
+                <div class="success-badge" style="background: rgba(255, 71, 87, 0.1); color: #ff4757; border-color: rgba(255, 71, 87, 0.2);">Verification Failed</div>
+                <h1 class="error-msg">No Preset Detected</h1>
+                <p>We couldn't track your download reference. Please access this secured page directly from your payment confirmation window.</p>
             `;
         }
     </script>
