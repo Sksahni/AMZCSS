@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?><!--
+Created by Alight Motion (http://alightmotion.com)
+Exported: 2026-07-15 11:51 AM
+5.0.273.1028417 (1028417)
+e3844be (6 Mar 2026 3:14:40 pm)
+-->
+<scene title="amzcss cc2" width="1280" height="720" exportWidth="1920" exportHeight="1080" precompose="dynamicResolution" bgcolor="#ff000000" totalTime="2015" fps="60" modifiedTime="1784096496222" amver="1028417" ffver="106" am="com.alightcreative.motion/5.0.273.1028417" amplatform="android" retime="freeze" retimeAdaptFPS="false">
+  <media uri="content://media/external/images/media/1000030073" filename="FreeFire_07_08_2026 15_02_28.png" title="FreeFire_07_08_2026 15_02_28.png" type="image/png" size="1573431" orientation="0" infoUpdated="1784096337198" width="1666" height="750" />
+  <shape id="202427751" label="FreeFire_07_08_2026 15_02_28.png" startTime="0" endTime="2015" fillType="media" fillImage="content://media/external/images/media/1000030073" mediaFillMode="fill" s=".rect">
+    <transform>
+      <location value="640.000000,360.000000,0.000000" />
+      <scale value="1.250000,1.250000" />
+    </transform>
+    <property name="size" type="vec2" value="640.000000,288.000000" />
+  </shape>
+  <shape id="202427756" label="AMZCSS" startTime="1000" endTime="2015" fillType="color" blending="subtract" speed="0.149472" mediaFillMode="stretch" s=".rect">
+    <transform>
+      <location value="720.000000,1280.000000,0.000000" />
+      <scale value="7.200045,12.800001" />
+    </transform>
+    <fillColor value="#ff000000" />
+    <effect id="com.alightcreative.effects.lift" locallyApplied="false">
+      <property name="fill" type="float" value="0.000000" />
+    </effect>
+    <effect id="com.alightcreative.effects.exposure" locallyApplied="true">
+      <property name="exposure" type="float" value="-1.040000" />
+      <property name="gamma" type="float" value="1.015000" />
+      <property name="offset" type="float" value="0.000000" />
+    </effect>
+    <effect id="com.alightcreative.effects.gaussianblur" locallyApplied="true">
+      <property name="strength" type="float" value="0.085000" />
+    </effect>
+    <property name="size" type="vec2" value="100.000000,100.000000" />
+  </shape>
+  <shape id="202427757" label="AMZCSS" startTime="1000" endTime="2015" fillType="color" blending="linear-dodge" speed="0.149472" mediaFillMode="stretch" s=".roundrect">
+    <transform>
+      <location value="720.000000,1280.000000,0.000000" />
+      <scale value="0.870025,1.063495" />
+    </transform>
+    <fillColor value="#ff58dfad" />
+    <effect id="com.alightcreative.effects.lift" locallyApplied="true">
+      <property name="fill" type="float" value="0.000000" />
+    </effect>
+    <effect id="com.alightcreative.effects.exposure" locallyApplied="true">
+      <property name="exposure" type="float" value="0.270000" />
+      <property name="gamma" type="float" value="0.080000" />
+      <property name="offset" type="float" value="0.050000" />
+    </effect>
+    <effect id="com.alightcreative.effects.gaussianblur" locallyApplied="true">
+      <property name="strength" type="float" value="0.435000" />
+    </effect>
+    <effect id="com.alightcreative.effects.colorhot" locallyApplied="true">
+      <property name="color" type="vec3" value="23.264395,1.000000,0.182143" />
+      <property name="tint" type="vec3" value="60.000000,1.000000,0.000000" />
+    </effect>
+    <property name="size" type="vec2" value="828.409668,1203.578369" />
+    <property name="cornerRadius" type="float" value="25.000000" />
+  </shape>
+  <shape id="202427758" label="AMZCSS" startTime="1000" endTime="2015" fillType="color" speed="0.149472" mediaFillMode="stretch" s=".rect">
+    <transform>
+      <location value="720.000000,1280.000000,0.000000" />
+      <scale value="7.200000,12.800001" />
+    </transform>
+    <fillColor value="#ff816664" />
+    <effect id="com.alightcreative.effects.lift" locallyApplied="true">
+      <property name="fill" type="float" value="0.000000" />
+    </effect>
+    <effect id="com.alightcreative.spotcolor2" locallyApplied="true">
+      <property name="color" type="color" value="#ffffc9a3" />
+      <property name="threshold" type="float" value="2.000000" />
+      <property name="feather" type="float" value="0.250000" />
+      <property name="saturation" type="float" value="0.000000" />
+      <property name="choke" type="float" value="5.000000" />
+    </effect>
+    <property name="size" type="vec2" value="100.000000,100.000000" />
+  </shape>
+  <shape id="202427759" label="AMZCSS" startTime="1000" endTime="2015" fillType="color" blending="linear-dodge" speed="0.149472" mediaFillMode="stretch" s=".rect">
+    <transform>
+      <location value="720.000000,1280.000000,0.000000" />
+      <scale value="7.200000,12.800001" />
+    </transform>
+    <fillColor value="#ff000000" />
+    <effect id="com.alightcreative.effects.lift" locallyApplied="true">
+      <property name="fill" type="float" value="0.000000" />
+    </effect>
+    <property name="size" type="vec2" value="100.000000,100.000000" />
+  </shape>
+</scene>
